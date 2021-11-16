@@ -122,3 +122,248 @@ import logo from './assets/logo.png'
     pero esto no significa que vayamos a presentarlas todas, es para que les entre curiosidad
 
 </Notes>
+
+---
+
+<CodeSurfer>
+
+```javascript title="Variable scoping"
+  let a = 1;
+
+  if (a === 1) {
+    let a = 2;
+
+    console.log(a); // 2
+  }
+
+  console.log(a); // 1
+```
+
+```javascript title="Variable scoping"
+  const x = 1;
+
+  if (x === 1) {
+    // You cannot re-assign the value similar to let variable
+    const y = 2;
+
+    console.log(y); // 2
+  }
+
+  console.log(x); // 1
+```
+
+</CodeSurfer>
+
+<Logo/>
+
+<Notes>
+
+  - 
+
+</Notes>
+
+---
+
+## Modules
+
+Content
+
+<Logo/>
+
+<Notes>
+
+  - 
+
+</Notes>
+
+---
+
+<CodeSurfer>
+
+```javascript title="Arrow functions"
+  // Function
+  const add = function (a, b) {
+    return a + b;
+  }
+
+  // Arrow function
+  const add = (a, b) => a + b
+```
+
+</CodeSurfer>
+
+<Logo/>
+
+<Notes>
+
+  - 
+
+</Notes>
+
+---
+
+<CodeSurfer>
+
+```javascript title="Default parameters in functions"
+  const add = (a = 10, b = 20) => a + b
+
+  add(5, 5) // 10
+  add(5)    // 25
+  add()     // 30
+```
+
+</CodeSurfer>
+
+<Logo/>
+
+<Notes>
+
+  - 
+
+</Notes>
+
+---
+
+## Asincronía - Promise
+
+Content
+
+<Logo/>
+
+<Notes>
+
+  - 
+
+</Notes>
+
+---
+
+## Arrays
+
+- Array methods
+- Destructuring
+  - For..of 
+  - Rest parameter
+  - Spread operator
+
+<Logo/>
+
+<Notes>
+
+  - 
+
+</Notes>
+
+---
+
+## Objects
+
+- Object methods
+- Destructuring
+  - Rest parameter
+  - Spread operator
+- Classes
+- Enhanced object literals
+- Optional chaining
+
+<Logo/>
+
+<Notes>
+
+  - 
+
+</Notes>
+
+---
+
+<CodeSurfer>
+
+```javascript title="String methods (padding)"
+  const cardNumber = '01234567898765'
+
+  const lastFourDigits = cardNumber.slice(-4)
+  lastFourDigits.padStart(cardNumber.length, '*') // **********8765
+
+  const firstFourDigits = cardNumber.slice(0, 4)
+  firstFourDigits.padEnd(cardNumber.length, '*') // 0123**********
+```
+
+</CodeSurfer>
+
+<Logo/>
+
+<Notes>
+
+  - 
+
+</Notes>
+
+---
+
+<CodeSurfer>
+
+```javascript title="String methods (trim)"
+  const message = '   Hello world!   '
+
+  message.trimStart()   // 'Hello world!   '
+  message.trimEnd()     // '   Hello world!'
+```
+
+</CodeSurfer>
+
+<Logo/>
+
+<Notes>
+
+  - 
+
+</Notes>
+
+---
+
+<CodeSurfer>
+
+```javascript title="Template literals"
+const firstName = 'John'
+console.log(`Hello ${firstName}!
+Good morning!`)
+
+// ouput:
+Hello John!
+Good morning!
+```
+
+</CodeSurfer>
+
+<Logo/>
+
+<Notes>
+
+  - 
+
+</Notes>
+
+---
+
+<CodeSurfer>
+
+```javascript title="Nullish coalescing operator"
+  const car = { name: "", speed: 0  }
+
+
+  console.log(car.name  || "Unknown")  // "Unknown"
+  console.log(car.speed || 90)         // 90
+
+  console.log(car.name  ?? "Unknown")  // "" 
+  console.log(car.speed ?? 90)         // 0
+```
+
+</CodeSurfer>
+
+<Logo/>
+
+<Notes>
+
+  - 
+
+</Notes>
