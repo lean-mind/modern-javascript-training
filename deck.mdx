@@ -2,7 +2,7 @@ import {CodeSurfer} from "code-surfer";
 import defaultTheme, {highlight} from 'mdx-deck/themes'
 import {Notes, Appear} from 'mdx-deck'
 
-import {Logo, JavaScriptRepl} from './components'
+import { Logo, JavaScriptRepl, Table, Column } from './components'
 import logo from './assets/logo.png'
 
 # Javascript Moderno
@@ -19,137 +19,106 @@ import logo from './assets/logo.png'
 
 ---
 
-## Cosas
+### ¡Novedades!
 
-- Block scoping
-- New methods
-- Exponent operator
-- Backtick string
-- Binary and octal literals
-- Classes
-
-<Logo/>
-
-<Notes>
-
-  - Creo que no hace falta entrar en detalle en estos (falta un titulo decente)
-
-</Notes>
-
----
-
-## Objects
-
-- Shorthand syntax
-- Getters and setters
-- Extract values
-- Methods
-- Computed property names
-
-<Logo/>
-
-<Notes>
-
-  - Todos son interesantes y necesarios creo yo
-
-</Notes>
-
----
-
-## Modules
-
-- Imports
-- Exports
-
-<Logo/>
-
-<Notes>
-
-  - No entrar mucho en detalle
-  - Distinguir bien entre lo que recomendamos y lo que no
-
-</Notes>
-
----
-
-## Functions
-
-- Function arguments
-- Fat arrows
-
-<Logo/>
-
-<Notes>
-
-  - Algujnos ejemplos también podríamos unificarlos
-
-</Notes>
-
----
-
-## Destructuring
-
-- Destructuring assignment
-- Loops
-- Default values
-- Reassigning keys
-- Function arguments
-- Object destructuring
-
-<Logo/>
-
-<Notes>
-
-  - Quizás podríamos agrupar varios en un sólo ejemplo
-  - Default values tiene distintos, uno de parámetros de un objeto o array y otro del objeto o array entero
-
-</Notes>
-
----
-
-## Spread operator
-
-- Object spread
-- Array spread
-
-<Logo/>
-
-<Notes>
-
-  - Ambos son totalmente necesarios de explicar
-
-</Notes>
-
----
-
-## Promises
-
-- Async-await
-- Making promises
-- Using promises
-- Promise functions
-- Using promises with finally
+<Table>
+  <Column title="ES2015">
+    <ul>
+      <li>Variable Scoping</li>
+      <li>Arrow functions</li>
+      <li>Classes</li>
+      <li>Enhanced object literals</li>
+      <li>Template literals</li>
+      <li>Destructuring</li>
+      <li>Default parameters</li>
+      <li>Rest parameter</li>
+      <li>Spread Operator</li>
+      <li>Iterators & For..of</li>
+      <li>Generators</li>
+      <li>Modules</li>
+      <li>Set</li>
+      <li>Weakset</li>
+      <li>Map</li>
+      <li>Weakmap</li>
+      <li>Unicode</li>
+      <li>Proxies</li>
+      <li>Symbols</li>
+      <li>Promises</li>
+      <li>Reflect</li>
+      <li>Binary and Octal</li>
+      <li>Proper Tail calls</li>
+      <li>Array find methods</li>
+    </ul>
+  </Column>
+  <Column title="ES2016">
+    <ul>
+      <li>Array includes</li>
+      <li>Exponentiation Operator</li>
+    </ul>
+  </Column>
+  <Column title="ES2017">
+    <ul>
+      <li>Async functions</li>
+      <li>Object values</li>
+      <li>Object entries</li>
+      <li>Object property descriptors</li>
+      <li>String padding</li>
+      <li>Shared memory and atomics</li>
+      <li>Trailing commas</li>
+    </ul>
+  </Column>
+  <Column title="ES2018">
+    <ul>
+      <li>Async iterators</li>
+      <li>Object rest and spread operators</li>
+      <li>Promise finally</li>
+    </ul>
+  </Column>
+  <Column title="ES2019">
+    <ul>
+      <li>Array flat and flatMap</li>
+      <li>Object fromEntries</li>
+      <li>String trimStart and trimEnd</li>
+      <li>Symbol description</li>
+      <li>Optional Catch Binding</li>
+      <li>JSON Improvements</li>
+      <li>Array Stable Sort</li>
+      <li>Function.toString()</li>
+      <li>Private Class Variable</li>
+    </ul>
+  </Column>
+  <Column title="ES2020">
+    <ul>
+      <li>BigInt</li>
+      <li>Dynamic Import</li>
+      <li>Nullish Coalescing Operator</li>
+      <li>Optional chaining</li>
+      <li>Promise allSettled</li>
+      <li>String matchAll</li>
+      <li>globalThis</li>
+      <li>import.meta</li>
+      <li>for..in order</li>
+    </ul>
+  </Column>
+  <Column title="ES2021">
+    <ul>
+      <li>String replaceAll</li>
+      <li>Promise any</li>
+      <li>AggregateError</li>
+      <li>Logical assigment operators (??=, &&=, ||=)</li>
+      <li>WeakRef</li>
+      <li>FinalizationRegistry</li>
+      <li>Separators for numeric literals (1_000)</li>
+      <li>Array.prototype.sort</li>
+    </ul>
+  </Column>
+</Table>
 
 <Logo/>
 
 <Notes>
 
-  - No creo que sea necesario explicarlo en profundidad, se podría hacer otra formación de esto específico más adelante
-
-</Notes>
-
----
-
-## Async generator 🚬🚬🚬
-
-- Generators
-- For..of iteration
-
-<Logo/>
-
-<Notes>
-
-  - No creo que sea necesario explicarlo en profundidad, simplemente hacer una mención de que existe
-  - En el caso de que sea necesario incluirlo en la formación de promesas
+  - Esto son todas las cosas nuevas que han entrado desde 2015, 
+    pero esto no significa que vayamos a presentarlas todas, es para que les entre curiosidad
 
 </Notes>

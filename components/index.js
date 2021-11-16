@@ -1,3 +1,5 @@
 export * from './Logo'
 export * from './Layout'
 export * from './JavaScriptRepl'
+export * from './Table/Table'
+export * from './Table/Column'
