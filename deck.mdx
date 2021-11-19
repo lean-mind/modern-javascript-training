@@ -17,7 +17,11 @@ import callbackHell from './assets/callback-hell.png'
 <Notes>
 
   - https://devhints.io/es6
-  - ¿Qué se considera JavaScript moderno? Podemos definir como JavaScript moderno al JavaScript a partir de ES2015, ya que a partir de esta versión el lenguaje dió un salto de calidad. Esto sumado al compromiso por parte de Ecma international y la comunidad de JavaScript de lanzar una nueva versión cada año añadiendo las nuevas funcionalidades. Todo esto junto con Node.js conllevó a una explosión en cuanto al uso del lenguaje y herramientas del ecosistema. Todo esto permite un desarrollo en JavaScript más rápido y seguro que antes.
+  - ¿Qué se considera JavaScript moderno? Podemos definir como JavaScript moderno al JavaScript a partir de ES2015, 
+    ya que a partir de esta versión el lenguaje dió un salto de calidad.
+  - Esto sumado al compromiso por parte de Ecma international y la comunidad de JavaScript de lanzar una nueva versión cada año añadiendo las nuevas funcionalidades.
+  - Todo esto junto con Node.js conllevó a una explosión en cuanto al uso del lenguaje y herramientas del ecosistema.
+  - Todo esto permite un desarrollo en JavaScript más rápido y seguro que antes.
 
 </Notes>
 
@@ -189,7 +193,6 @@ console.log(x); // 1
   - `var` es como se han definido variables en JavaScript desde el principio de los tiempos. Sin embargo, presenta una serie de problemas:
     - Su ámbito es global dentro de la función que está, por lo que desde cualquier lugar de la función puedes llegar a cambiar algunos valores derivando en resultados inesperados. `let` y `const` lanzarían un `ReferenceError`
     - Puede ser usada antes de ser declarada, usando `let` o `const` lanzaría un `ReferenceError`
-    -
 
 </Notes>
 
@@ -610,21 +613,229 @@ for (const [index, value] of numberList.entries()) {
 
 ---
 
-## Objects
+<CodeSurfer>
 
-- Object methods
-- Destructuring
-  - Rest parameter
-  - Spread operator
-- Classes
-- Enhanced object literals
-- Optional chaining
+```javascript title="Object methods (entries)"
+  const invoice = {
+    id: 'SUP0001',
+    total: 254.13,
+    foo() {
+      return `${this.id} ${this.total}`
+    }
+  }
+  Object.entries(invoice) // [['id', 'SUP0001'], ['total', 254.13], ['foo', ƒ()]]
+
+  const list = ['Bat Man', 'Superman', 'Green Lintern', 'Wonder Woman']
+  Object.entries(list) // [[0, 'Bat Man'], [1, 'Superman'], [2, 'Green Lintern'], [3, 'Wonder Woman']]
+```
+
+</CodeSurfer>
+
+<Logo/>
+
+<Notes>
+
+  - Devuelve una matriz de pares clave valor de un objeto
+  - Si no se utiliza con un objeto, realiza una coerción (ej, listas)
+
+</Notes>
+
+---
+
+<CodeSurfer>
+
+```javascript title="Object methods (values)"
+  const invoice = {
+    id: 'SUP0001',
+    total: 254.13,
+    foo() {
+      return `${this.id} ${this.total}`
+    }
+  }
+  Object.values(invoice) // ['SUP0001', 254.13, ƒ()]
+  Object.keys(invoice) // ['id', 'total', 'foo']
+```
+
+</CodeSurfer>
+
+<Logo/>
+
+<Notes>
+
+  - Devuelve una lista cuyos elementos son los valores de las propiedades
+  - Object.keys() ya existía antes de 2015, pero es complementario
+
+</Notes>
+
+---
+
+<CodeSurfer>
+
+```javascript title="Destructuring (spread operator)"
+  const money = { amount: 1_000_000_000_000, currency: '¥' }
+  const wallet = { owner: '欽明天皇', ...money }
+
+  wallet // { owner: '欽明天皇', amount: 1_000_000_000_000, currency: '¥' }
+```
+
+</CodeSurfer>
+
+<Logo/>
+
+<Notes>
+
+  - 欽明天皇 - Kinmei Tennoo (Emperador Kinmei)
+
+</Notes>
+
+---
+
+<CodeSurfer>
+
+```javascript title="Destructuring (rest parameter)"
+  const wallet = { owner: '欽明天皇', amount: 1_000_000_000_000, currency: '¥' }
+  const { owner, ...money } = wallet
+
+  owner // '欽明天皇'
+  money // { amount: 1_000_000_000_000, currency: '¥' }
+```
+
+</CodeSurfer>
+
+<Logo/>
+
+<Notes>
+
+  - 欽明天皇 - Kinmei Tennoo (Emperador Kinmei)
+
+</Notes>
+
+---
+
+<CodeSurfer>
+
+```javascript title="Classes"
+  class Animal {
+    #name
+    
+    constructor(name) {
+      this.#name = name  
+    }
+    
+    get name() {
+      return this.#name
+    }
+    
+    eat() {
+      console.log(`${this.name} is eating.`)
+    }
+  }
+```
+
+</CodeSurfer>
 
 <Logo/>
 
 <Notes>
 
   -
+
+</Notes>
+
+---
+
+<CodeSurfer>
+
+```javascript title="Classes"
+  class Bird extends Animal {
+    constructor(name) {
+      super(name)
+    }
+
+    fly() {
+      console.log(`${this.name} is flying.`)
+    }
+  }
+
+  const pidgeon = new Bird('Pidgeot')
+
+  pidgeon.eat()
+  pidgeon.fly()
+```
+
+</CodeSurfer>
+
+<Logo/>
+
+<Notes>
+
+  -
+
+</Notes>
+
+---
+
+<CodeSurfer>
+
+```javascript title="Enhanced object literals"
+  const currency = 'EUR'
+  const type = 'withdraw'
+
+  const transaction = {
+    currency: currency,
+    type: type
+  }
+```
+
+```javascript title="Enhanced object literals"
+  const currency = 'EUR'
+  const type = 'withdraw'
+
+  const transaction = {
+    currency,
+    type
+  }
+```
+
+</CodeSurfer>
+
+<Logo/>
+
+<Notes>
+
+  -
+
+</Notes>
+
+---
+
+<CodeSurfer>
+
+```javascript title="Optional chaining"
+  const anselmo = {
+    name: 'Anselmo'
+  }
+  const antonio = {
+    name: 'Antonio',
+    cat: {
+      name: 'Schrodinger'
+    }
+  }
+
+  console.log(anselmo?.cat?.name)
+  console.log(antonio?.cat?.name)
+
+  // throw TypeError: Cannot read property 'name' of undefined
+  console.log(anselmo.cat.name)
+```
+
+</CodeSurfer>
+
+<Logo/>
+
+<Notes>
+
+  - Tambien conocido como Elvis
 
 </Notes>
 
