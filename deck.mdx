@@ -1,8 +1,7 @@
 import {CodeSurfer} from "code-surfer";
-import defaultTheme, {highlight} from 'mdx-deck/themes'
-import {Notes, Appear} from 'mdx-deck'
+import {Notes} from 'mdx-deck'
 
-import { Logo, JavaScriptRepl, Table, Column } from './components'
+import { Logo, Table, Column } from './components'
 import logo from './assets/logo.png'
 
 # Javascript Moderno
@@ -14,6 +13,7 @@ import logo from './assets/logo.png'
 <Notes>
 
   - https://devhints.io/es6
+  - ¿Qué se considera JavaScript moderno? Podemos definir como JavaScript moderno al JavaScript a partir de ES2015, ya que a partir de esta versión el lenguaje dió un salto de calidad. Esto sumado al compromiso por parte de Ecma international y la comunidad de JavaScript de lanzar una nueva versión cada año añadiendo las nuevas funcionalidades. Todo esto junto con Node.js conllevó a una explosión en cuanto al uso del lenguaje y herramientas del ecosistema. Todo esto permite un desarrollo en JavaScript más rápido y seguro que antes.
 
 </Notes>
 
@@ -118,7 +118,7 @@ import logo from './assets/logo.png'
 
 <Notes>
 
-  - Esto son todas las cosas nuevas que han entrado desde 2015, 
+  - Esto son todas las cosas nuevas que han entrado desde 2015,
     pero esto no significa que vayamos a presentarlas todas, es para que les entre curiosidad
 
 </Notes>
@@ -128,28 +128,52 @@ import logo from './assets/logo.png'
 <CodeSurfer>
 
 ```javascript title="Variable scoping"
-  let a = 1;
+var a = 1;
 
-  if (a === 1) {
-    let a = 2;
+if (a === 1) {
+  var a = 2;
 
-    console.log(a); // 2
-  }
+  console.log(a); // 2
+}
 
-  console.log(a); // 1
+console.log(a); // 2
 ```
 
 ```javascript title="Variable scoping"
-  const x = 1;
+let a = 1;
 
-  if (x === 1) {
-    // You cannot re-assign the value similar to let variable
-    const y = 2;
+if (a === 1) {
+  let a = 2;
 
-    console.log(y); // 2
-  }
+  console.log(a); // 2
+}
 
-  console.log(x); // 1
+console.log(a); // 1
+```
+
+```javascript title="Variable scoping"
+const x = 1;
+
+if (x === 1) {
+  const x = 2;
+
+  console.log(x); // 2
+}
+
+console.log(x); // 1
+```
+
+```javascript title="Variable scoping"
+const x = 1;
+
+if (x === 1) {
+  const x = 2;
+
+  console.log(x); // 2
+}
+x = 3 // throw SyntaxError
+
+console.log(x); // 1
 ```
 
 </CodeSurfer>
@@ -158,7 +182,10 @@ import logo from './assets/logo.png'
 
 <Notes>
 
-  - 
+  - `var` es como se han definido variables en JavaScript desde el principio de los tiempos. Sin embargo, presenta una serie de problemas:
+    - Su ámbito es global dentro de la función que está, por lo que desde cualquier lugar de la función puedes llegar a cambiar algunos valores derivando en resultados inesperados. `let` y `const` lanzarían un `ReferenceError`
+    - Puede ser usada antes de ser declarada, usando `let` o `const` lanzaría un `ReferenceError`
+    -
 
 </Notes>
 
@@ -172,7 +199,7 @@ Content
 
 <Notes>
 
-  - 
+  -
 
 </Notes>
 
@@ -181,13 +208,13 @@ Content
 <CodeSurfer>
 
 ```javascript title="Arrow functions"
-  // Function
-  const add = function (a, b) {
-    return a + b;
-  }
+// Function
+const add = function (a, b) {
+  return a + b;
+}
 
-  // Arrow function
-  const add = (a, b) => a + b
+// Arrow function
+const add = (a, b) => a + b
 ```
 
 </CodeSurfer>
@@ -196,7 +223,8 @@ Content
 
 <Notes>
 
-  - 
+  - Aunque parezca que es azúcar sintáctico, realmente hay una ligera diferencia. En el caso de las funciones de toda la vida, tienen su propio this, mientras que las arrow functions usan el this del scope en el que están.
+  - Las arrow functions es mejor usarlas como funciones anónimas, como métodos y demás darán errores, ya que no tienen ni idea del this.
 
 </Notes>
 
@@ -205,11 +233,11 @@ Content
 <CodeSurfer>
 
 ```javascript title="Default parameters in functions"
-  const add = (a = 10, b = 20) => a + b
+const add = (a = 10, b = 20) => a + b
 
-  add(5, 5) // 10
-  add(5)    // 25
-  add()     // 30
+add(5, 5) // 10
+add(5)    // 25
+add()     // 30
 ```
 
 </CodeSurfer>
@@ -218,7 +246,7 @@ Content
 
 <Notes>
 
-  - 
+  - Los parámetros por defecto em las funciones pueden ser llamadas a otras funciones en incluso otros parámetros anteriores.
 
 </Notes>
 
@@ -232,25 +260,208 @@ Content
 
 <Notes>
 
-  - 
+  -
 
 </Notes>
 
 ---
 
-## Arrays
+## Arrays - Métodos nuevos
 
-- Array methods
-- Destructuring
-  - For..of 
-  - Rest parameter
-  - Spread operator
+<CodeSurfer>
+
+```js title="Array.prototype.find"
+const numberList = [10, 20, 30, 40, 50]
+
+numberList.find(x => x > 25) // 30
+```
+
+```js title="Array.prototype.find"
+const numberList = [10, 20, 30, 40, 50]
+
+numberList.find(x => x > 60) // undefined
+```
+
+</CodeSurfer>
 
 <Logo/>
 
 <Notes>
 
-  - 
+  - Devuelve el primer elemento que resulva satisfactoriamente la condición.
+  - Si no lo encuentra devuelve undef
+
+</Notes>
+
+---
+
+## Arrays - Métodos nuevos
+
+<CodeSurfer>
+
+```js title="Array.prototype.includes"
+const numberList = [10, 20, 30, 40, 50]
+
+numberList.includes(20) // true
+numberList.includes(25) // false
+```
+
+</CodeSurfer>
+
+<Logo/>
+
+<Notes>
+
+  - Muy útil para valores primitivos, pero algo inestable para objetos, ya que comparará por referencia y no por valor.
+
+</Notes>
+
+---
+
+## Arrays - Destructuring
+
+<CodeSurfer>
+
+```js title="Array destructuring"
+const [one, two, three] = [1,2,3]
+
+one // 1
+two // 2
+three // 3
+```
+
+```js title="Array destructuring"
+const [one, two, three, four] = [1,2,3]
+
+one // 1
+two // 2
+three // 3
+four // undefined
+```
+
+```js title="Array destructuring"
+const [one, two, three] = 'Hi!'
+
+one // 'H'
+two // 'i'
+three // '!'
+```
+
+</CodeSurfer>
+
+<Logo/>
+
+<Notes>
+
+  - Ponemos ejemplos y explicamos sobre array, pero realmente este tipo de destructuring se puede aplicar a cualquier iterable (Por ejemplo a un String o un Set).
+  - Se basa a en las posiciones
+
+</Notes>
+
+---
+
+## Arrays - Destructuring
+
+<CodeSurfer>
+
+```js title="Rest parameter"
+const [ten, ...restOfNumbers] = [10, 20, 30, 40, 50]
+
+ten // 10
+restOfNumbers // [20, 30, 40, 50]
+```
+
+```js title="Rest parameter"
+  const [ten, ...restOfNumbers, fifty] = [10, 20, 30, 40, 50]
+  // throw SyntaxError: Rest element must be last element
+```
+
+</CodeSurfer>
+
+<Logo/>
+
+<Notes>
+
+  - Los rest parameters se usa para agrupar todos los elementos restantes del array en una variable. Es como decir quiero esto, aquello y lo otro y el resto me lo pones en un tupper para llevar.
+  - Debe ser el último valor, de lo contrario lanzará un SyntaxError
+  - En el caso de rest parameter el uso de la elipsis se hace de cara a la definición de la variable.
+
+</Notes>
+
+---
+
+## Arrays - Destructuring
+
+<CodeSurfer>
+
+```js title="Spread operator"
+const workdays = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes']
+const weekend = ['Sábado', 'Domingo']
+const week = [...workdays, ...weekend]
+
+week // [ "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"]
+```
+
+</CodeSurfer>
+
+<Logo/>
+
+<Notes>
+
+  - El spread operator al contrario que el rest parameters divide en vez de agrupar.
+  - Se suele usar mucho para clonar arrays, ya que al usarlo genera un nuevo array de cero, en vez de hacer referencias a memoria.
+  - El orden en el que hacemos el spread importa, ya que el array final seguirá ese orden.
+  - En el caso del spread operator el uso de la elipsis se hace de cara a la asignación de la variable.
+
+</Notes>
+
+---
+
+## Arrays - Destructuring
+
+Artículo que explica el destructuring de Array:
+
+[https://ulisesantana.dev/blog/2021/array-destructuring/](https://ulisesantana.dev/blog/2021/array-destructuring/)
+
+<Logo/>
+
+<Notes>
+
+  -
+
+</Notes>
+
+---
+
+## Arrays - For of
+
+
+<CodeSurfer>
+
+```js title="For of"
+const numberList = [10, 20, 30, 40, 50]
+
+for (const value of numberList) {
+  console.log(value)
+}
+```
+
+```js title="For of"
+const numberList = [10, 20, 30, 40, 50]
+
+for (const [index, value] of numberList.entries()) {
+  console.log(`Number ${value} at position ${index}`)
+}
+```
+
+</CodeSurfer>
+
+
+<Logo/>
+
+<Notes>
+
+  - Al igual que el destructuring ponemos ejemplos y explicamos sobre array, pero realmente el for of se puede aplicar a cualquier iterable (Por ejemplo a un String o un Set).
 
 </Notes>
 
@@ -270,7 +481,7 @@ Content
 
 <Notes>
 
-  - 
+  -
 
 </Notes>
 
@@ -294,7 +505,7 @@ Content
 
 <Notes>
 
-  - 
+  -
 
 </Notes>
 
@@ -315,7 +526,7 @@ Content
 
 <Notes>
 
-  - 
+  -
 
 </Notes>
 
@@ -339,7 +550,7 @@ Good morning!
 
 <Notes>
 
-  - 
+  -
 
 </Notes>
 
@@ -354,7 +565,7 @@ Good morning!
   console.log(car.name  || "Unknown")  // "Unknown"
   console.log(car.speed || 90)         // 90
 
-  console.log(car.name  ?? "Unknown")  // "" 
+  console.log(car.name  ?? "Unknown")  // ""
   console.log(car.speed ?? 90)         // 0
 ```
 
@@ -364,6 +575,6 @@ Good morning!
 
 <Notes>
 
-  - 
+  -
 
 </Notes>
