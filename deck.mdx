@@ -1,8 +1,12 @@
 import {CodeSurfer} from "code-surfer";
+import {highlight} from 'mdx-deck/themes'
 import {Notes} from 'mdx-deck'
+
+export const theme = highlight
 
 import { Logo, Table, Column } from './components'
 import logo from './assets/logo.png'
+import callbackHell from './assets/callback-hell.png'
 
 # Javascript Moderno
 
@@ -193,13 +197,24 @@ console.log(x); // 1
 
 ## Modules
 
-Content
+```javascript title="Ecma Script Modules"
+// fileA.js
+export const meaningOfLife = 42
+
+...
+// fileB.js
+
+import { meaningOfLife } from './fileA'
+
+console.log(meaningOfLife) // 42
+```
 
 <Logo/>
 
 <Notes>
 
-  -
+  - Antes de 2015 JavaScript como lenguaje no tenía manera de dividir el código en ficheros o módulos e ir importándolos entre ellos para reusar código y no tener un fichero kilométrico. Existían librerías como RequireJS que permitían, pero no era ningún estándar.
+  - Con 2015 llegaron los conocidos como ES Modules para dar una forma estandarizada en el lenguaje para importar y exportar código entre ficheros JavaScript.
 
 </Notes>
 
@@ -252,15 +267,144 @@ add()     // 30
 
 ---
 
-## Asincronía - Promise
+## Asincronía
 
-Content
+<Logo/>
+
+<Notes>
+
+  - Vamos a hablar muy brevemente de la asincronía.
+
+</Notes>
+
+---
+
+## Asincronía - Antes de las promesas
+
+
+<CodeSurfer>
+
+```javascript title="Ejemplo de callback"
+button.addEventListener('click', function(){
+   alert('Alerta')
+});
+```
+
+</CodeSurfer>
+
+
+<Logo/>
+
+<Notes>
+
+  - La gestión de asincronía antes de 2015 se hacía por callbacks, lo cual hacía todo muy difícil de debuggear y leer, ya que se originaban los famosos callback hells.
+
+</Notes>
+
+---
+
+## Asincronía - Antes de las promesas
+
+
+<img src={callbackHell} />
+
+<Logo/>
+
+<Notes>
+
+  - A esto es a lo que me refiero cuando hablo de callback hell.
+
+</Notes>
+
+---
+
+## Asincronía - Promesas
+
+```javascript title="Ejemplo de Promise"
+function delay() {
+  return new Promise((resolve, reject) => {
+    if (Math.random() > 0.5) {
+      return resolve(42)
+    } else {
+      return reject(new Error('💥 Boom!!'))
+    }
+  })
+}
+```
 
 <Logo/>
 
 <Notes>
 
   -
+
+</Notes>
+
+---
+
+```javascript title="Ejemplo de Promise"
+delay()
+  .then((result) => {
+    console.log(`Received ${result}.`)
+  })
+  .catch((err) => {
+    console.error(`Error ${err.toString()} received.`)
+  })
+  .finally(() => {
+    console.log('I am executed even if promise is resolved or rejected')
+  })
+```
+
+<Logo/>
+
+<Notes>
+
+  -
+
+</Notes>
+
+---
+
+## Asincronía - async/await
+
+```javascript title="Ejemplo de async/await"
+async function delay() {
+  if (Math.random() > 0.5) {
+    return 42
+  } else {
+    throw new Error('💥 Boom!!')
+  }
+}
+```
+
+<Logo/>
+
+<Notes>
+
+  - Toda función con la keyword async devuelve una promesa. Dicho de otra manera, toda función asíncrona devuelve una promesa.
+
+</Notes>
+
+---
+
+## Asincronía - async/await
+
+```javascript title="Ejemplo de async/await"
+try {
+  const result = await delay()
+  console.log(`Received ${result}.`)
+} catch (err) {
+  console.error(`Error ${err.toString()} received.`)
+} finally {
+  console.log('I am executed even if promise is resolved or rejected')
+}
+```
+
+<Logo/>
+
+<Notes>
+
+  - El await siempre debe ser usado dentro de una función asíncrona (En Node.js llegará en breve la opción de poder usarlo a nivel global).
 
 </Notes>
 
@@ -288,7 +432,7 @@ numberList.find(x => x > 60) // undefined
 
 <Notes>
 
-  - Devuelve el primer elemento que resulva satisfactoriamente la condición.
+  - Devuelve el primer elemento que resuelva satisfactoriamente la condición.
   - Si no lo encuentra devuelve undef
 
 </Notes>
@@ -434,7 +578,6 @@ Artículo que explica el destructuring de Array:
 ---
 
 ## Arrays - For of
-
 
 <CodeSurfer>
 
